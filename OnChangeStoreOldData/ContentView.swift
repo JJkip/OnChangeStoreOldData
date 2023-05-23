@@ -8,12 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var previousValue = 0
+    @State private var currentValue = 0
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        VStack(spacing: 20) {
+            Text("Current value: \(currentValue)")
+            Button("Increament current value") {
+                currentValue += 1
+            }
+            .buttonStyle(.bordered)
+            Text("Previous value: \(previousValue)")
+        }
+        .onChange(of: currentValue) {
+            [currentValue] _ in previousValue = currentValue
         }
         .padding()
     }
